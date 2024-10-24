@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirob</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: black; /* Black background */
+            color: white; /* White text for contrast */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden; /* Prevent scrolling */
+        }
+        h1, h2 {
+            animation: fadeIn 2s;
+            text-shadow: 0 0 20px rgba(30, 144, 255, 0.8), 0 0 30px rgba(0, 0, 139, 0.7);
+            margin: 10px 0;
+        }
+        h1 {
+            font-size: 64px; /* Main heading size */
+            color: #1e90ff; /* Blue color for main heading */
+        }
+        h2 {
+            font-size: 36px; /* Second line size */
+            color: #00bfff; /* Lighter blue color for second line */
+        }
+        .button-container {
+            margin-top: 30px; /* Space above buttons */
+            display: flex;
+            gap: 20px; /* Space between buttons */
+        }
+        button {
+            color: white;
+            border: none;
+            border-radius: 25px; /* More rounded corners */
+            padding: 15px 30px; /* Larger padding */
+            font-size: 24px; /* Increased font size */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, color 0.3s; /* Smooth transitions */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            min-width: 120px;
+            position: relative; /* Positioning for effects */
+        }
+        .yes-button {
+            background-color: rgba(0, 128, 0, 0.9); /* Green for Yes */
+        }
+        .no-button {
+            background-color: rgba(255, 0, 0, 0.9); /* Red for No */
+        }
+        .yes-message {
+            display: none; /* Initially hidden */
+            margin-top: 40px;
+            font-size: 24px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.5s ease-in; /* Slide-in effect */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>I Love You</h1>
+    <h2>Will you be my girlfriend?</h2>
+    <div class="button-container">
+        <button class="yes-button" id="yesButton" onclick="showMessage()" aria-label="Yes">Yes</button>
+        <button class="no-button" id="noButton" 
+                onmouseover="hoverChange()" 
+                onmouseout="resetChange()" 
+                aria-label="No">No</button>
+    </div>
+    <div class="yes-message" id="yesMessage" role="alert">
+        <p>Thank you for saying yes!</p>
+    </div>
+
+    <script>
+        function hoverChange() {
+            const yesButton = document.getElementById('yesButton');
+            const noButton = document.getElementById('noButton');
+
+            // Change Yes button to No
+            yesButton.classList.remove('yes-button');
+            yesButton.classList.add('no-button');
+            yesButton.innerText = 'No';
+
+            // Change No button to Yes
+            noButton.classList.remove('no-button');
+            noButton.classList.add('yes-button');
+            noButton.innerText = 'Yes';
+            noButton.onclick = showMessage; // Change functionality to Yes
+        }
+
+        function resetChange() {
+            const yesButton = document.getElementById('yesButton');
+            const noButton = document.getElementById('noButton');
+
+            // Reset Yes button
+            yesButton.classList.remove('no-button');
+            yesButton.classList.add('yes-button');
+            yesButton.innerText = 'Yes';
+            yesButton.onclick = showMessage; // Restore functionality
+
+            // Reset No button
+            noButton.classList.remove('yes-button');
+            noButton.classList.add('no-button');
+            noButton.innerText = 'No';
+            noButton.onclick = null; // No action on No
+        }
+
+        function showMessage() {
+            document.getElementById('yesMessage').style.display = 'block'; // Show the message
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth' // Smooth scroll effect
+            });
+        }
+    </script>
+</body>
+</html>
